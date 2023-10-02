@@ -43,7 +43,6 @@ function drawRectangle() {
     x = mouseX + xOff;
     y = mouseY + yOff;
   }
-
   rect(x, y, rWidth, rHeight);
 }
 
