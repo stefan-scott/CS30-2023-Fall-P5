@@ -7,6 +7,8 @@
 // Global Variables
 let segL = 10;
 let ballY = 200;  let ySpeed;
+let radiusTime = 40; let ySpeedTime = 10;
+let greyValueTime = 0; let noiseShift = 0.2;
            
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -21,6 +23,10 @@ function segmentLine(){
   while (x < width){
     //option 1: random()
     let greyValue = random(0,255);
+    //option 2: noise()
+    greyValue = noise(greyValueTime);
+    greyValue = map(greyValue,0,1,0,255);
+    greyValueTime += noiseShift;
 
     stroke(greyValue);
     line(x, height/2, x+segL, height/2);
