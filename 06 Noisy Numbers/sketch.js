@@ -6,6 +6,7 @@
 
 // Global Variables
 let segL = 10;
+let ballY = 200;  let ySpeed;
            
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -31,8 +32,15 @@ function rectangleOnLine(){
   rect(width*0.1,height/2,width*0.5, height*0.25);
 }
 
+function moveBall(){
+
+
+  circle(width*0.7, ballY, 30);
+}
+
 function draw() {
   background(220);
   segmentLine();
   rectangleOnLine();
+  moveBall();
 }
