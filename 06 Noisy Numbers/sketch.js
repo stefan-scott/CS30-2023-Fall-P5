@@ -8,7 +8,7 @@
 let segL = 10;
 let ballY = 200;  let ySpeed;
 let radiusTime = 40; let ySpeedTime = 10;
-let greyValueTime = 0; let noiseShift = 0.2;
+let greyValueTime = 0; let noiseShift = 0.1;
            
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -38,7 +38,11 @@ function rectangleOnLine(){
   //draw a single *rounded* rectangle on the line
   //option 1: random()
   let radius = random(2,70);
-  
+  //option 2: noise()
+  radius = noise(radiusTime);  //0-1, need to map it
+  radius = map(radius, 0, 1, 2, 70); //now update time
+  radiusTime += noiseShift;
+
   rectMode(CORNERS);
   strokeWeight(2);
   stroke(0);
@@ -49,6 +53,10 @@ function rectangleOnLine(){
 function moveBall(){
   //option 1:  random()
   ySpeed = random(-20,20); 
+  //option 2:  noise()
+  ySpeed = noise(ySpeedTime);  //0-1
+  ySpeed = map(ySpeed, 0,1, -20, 20);
+  ySpeedTime += noiseShift;
 
   ballY += ySpeed;
   circle(width*0.7, ballY, 30);
