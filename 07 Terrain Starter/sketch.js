@@ -2,6 +2,7 @@
 
 // Global Variables
 let rectWidth = 1;
+// 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -14,6 +15,7 @@ function drawTerrain(){
   for(let x = 0; x<width; x += rectWidth){
     //all rectangles 100px tall
     let rectHeight = random(0,height);
+
     rect(x,height, x+rectWidth, height - rectHeight);
   }
 }
