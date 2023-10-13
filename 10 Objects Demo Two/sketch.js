@@ -14,7 +14,9 @@ function setup() {
 function draw() {
   background(255);
   for(let p of points){
+    p.move();
     p.display();
+    p.connectPoints(points);
   }
 }
 
@@ -39,7 +41,43 @@ class MovingPoint{
     noStroke();
     circle(this.x, this.y, this.s);
   }
+
+  connectPoints(pointArray){
+    //check if any other points are nearby. If so,
+    //connect with a line.
+    //this.x  this.y   p.getX()  p.getY() 
+    stroke(this.c);
+    for(let p of pointArray){
+      if(p !== this){ //make sure p is not myself
+        let d = dist(this.x,this.y,p.getX(),p.getY());
+        if(d < reach){  //two points are close
+          line(this.x, this.y, p.getX(), p.getY());
+        }
+      }
+    }
+  }
+
+  getX(){return this.x};
+  getY(){return this.y};
+
+  move(){   //motion with Perlin Noise please
+    let xSpeed = noise(this.xTime);  //0-1     //-5 to 5
+    xSpeed = map(xSpeed,0,1,-this.maxSpeed,this.maxSpeed);
+    this.xTime += this.timeShift;
+
+    this.x += xSpeed;
+
+    //wrap around code
+    if(this.x < 0) this.x += width;
+    if(this.x > width) this.x -= width;
+  }
 }
+  
+
+
+
+
+
 
 
 
