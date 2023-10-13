@@ -3,13 +3,24 @@
 // October 13, 2023
 // OOP Recap, Perlin Noise, + object-object interactions
 
+// Global Variables
+let points = [];
+let reach = 150;   //max line length
 
 function setup() {
   createCanvas(windowWidth, windowHeight);                                    
 }
 
 function draw() {
-  background(220);
+  background(255);
+  for(let p of points){
+    p.display();
+  }
+}
+
+function mouseClicked(){
+  //trigger on a full press/release mouse interaction
+  points.push(new MovingPoint(mouseX, mouseY));
 }
 
 
