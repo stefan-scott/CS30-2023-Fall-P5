@@ -39,6 +39,13 @@ class MovingPoint{
   display(){
     fill(this.c);
     noStroke();
+    let d = dist(mouseX, mouseY, this.x, this.y);
+    if(d < reach){
+       this.s = map(d, 0, reach, 60, 20 )
+    }
+    else{
+      this.s = 20;
+    }
     circle(this.x, this.y, this.s);
   }
 
