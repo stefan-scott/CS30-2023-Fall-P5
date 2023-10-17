@@ -14,17 +14,24 @@ function draw() {
   myPlanet.display();
 }
 
+function mouseClicked(){
+  myPlanet.createMoon();
+}
+
 class Planet {
   constructor(x, y) {
     this.x = x; this.y = y; this.s = 100;
     this.moons = [];
   }
   createMoon() { //push a new moon object into array
-
+    this.moons.push(new Moon(this.x, this.y));
   }
   display() {
     circle(this.x, this.y, this.s);
     //now, 'process' the moons (move, display)
+    for(let m of this.moons){
+      m.update();
+    }
   }
 }
 
