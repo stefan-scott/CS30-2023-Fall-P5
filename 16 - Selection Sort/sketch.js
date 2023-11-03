@@ -7,7 +7,7 @@ let values = [];
 const NUM_VALUES = 20;
 
 function setup() {
-  randomSeed(10); //for debugging
+  //randomSeed(10); //for debugging
   noCanvas();   populateArray();  print(values);
   selectionSort();  print(values);
 }
@@ -17,9 +17,16 @@ function selectionSort(){
     let minimum = values[index];
     let minimumLoc = index;
     for(let searchIndex = index+1; searchIndex < values.length; searchIndex++){
-      
+      let cur = values[searchIndex];
+      if(cur < minimum){
+        minimum = cur;
+        minimumLoc = searchIndex;
+      }
     }
-
+    //Now, time to swap!
+    let temp = values[index];
+    values[index] = values[minimumLoc];
+    values[minimumLoc] = temp;
   }
 
 }
