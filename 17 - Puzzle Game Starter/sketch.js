@@ -11,15 +11,17 @@ let grid =
 
 const NUM_ROWS = 4;   const NUM_COLS = 5;
 let rectWidth = 50;   let rectHeight = 50;
+let col, row;  // x and y position of the mouse (grid)
 
 function setup() {
   createCanvas(rectWidth*NUM_COLS, rectHeight*NUM_ROWS);
 }
 
 function draw() {
+  col = getCurrentX();    row = getCurrentY();
   background(220);
   renderGrid();
-  print(int(mouseX/rectWidth));
+  print(col,row);
 }
 
 function getCurrentX(){ //return the current column mouse is in
