@@ -45,9 +45,28 @@ function addToSequence(){
 }
 
 function draw() {
-  background(220);
+ // background(220);
+ translate(0,height/2);
   // //temporary code:
   // cX = lerp(cX,mouseX,0.1);
   // circle(cX, height/2, 20);
 
+}
+
+class rArc{
+  constructor(start, end, direction){
+    this.start = start;   this.end = end;
+    this.direction = direction;  //0- forward:  upper arc
+  }                               //1- backward:  lower arc
+  display(){
+    let diameter = abs(this.start - this.end);
+    let x = (this.start + this.end) / 2; //centerpoint
+    strokeWeight(0.5);
+    if(this.direction===0){ //forward(upper)
+      arc(x,0,diameter,diameter,0,PI);
+    }
+    else{ //backward(lower)
+      arc(x,0,diameter,diameter,PI,0);
+    }
+  }
 }
