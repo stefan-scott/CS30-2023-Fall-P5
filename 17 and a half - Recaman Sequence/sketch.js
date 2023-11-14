@@ -18,8 +18,12 @@ let sequence = []; // Array to hold the Recaman numbers
 let stepAmount = 1;  // How much the next step will be by
 let currentValue = 0; // most recent number in the sequence.
 
+let largest = 0;  let scaleAmount = 0;  //dynamic scaling
+let arcList = [];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  stroke(255);     noFill();
 }
 
 function addToSequence(){
@@ -27,7 +31,7 @@ function addToSequence(){
   let backwards = currentValue - stepAmount;
   if(backwards > 0 && !sequence.includes(backwards)){
     //do some drawing stuff here...
-
+    arcList.push(new rArc(currentValue,backwards, sequence.length%2));
     sequence.push(backwards);
     currentValue = backwards;
     stepAmount++;
@@ -35,22 +39,30 @@ function addToSequence(){
   else{  //next number is forward instead
     let forwards = currentValue + stepAmount;
     //do some drawing stuff here...
-
+    arcList.push(new rArc(currentValue,forwards, sequence.length%2));
     sequence.push(forwards);
     currentValue = forwards;
     stepAmount++;
+    if(currentValue > largest) largest = currentValue;
   }
 
 
 }
 
 function draw() {
- // background(220);
+ background(0);
  translate(0,height/2);
-  // //temporary code:
-  // cX = lerp(cX,mouseX,0.1);
-  // circle(cX, height/2, 20);
+ addToSequence();
+ scaleAmount = lerp(scaleAmount,width/largest,0.05);  
+ scale(scaleAmount);
+ renderArcs();
+}
 
+function renderArcs(){
+  //loop through our list of arcs and display
+  for(let r of arcList){
+    r.display();
+  }
 }
 
 class rArc{
